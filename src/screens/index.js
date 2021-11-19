@@ -1,4 +1,4 @@
 import ScreenNotes from './ScreenNotes';
-import ScreenEditNote from './ScreenEditNote';
+import ScreenNoteDetails from './ScreenNoteDetails';
 
-export default {ScreenNotes, ScreenEditNote};
+export default {ScreenNotes, ScreenNoteDetails};

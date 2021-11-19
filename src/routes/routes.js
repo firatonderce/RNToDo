@@ -7,8 +7,8 @@ const routes = [
     isHeader: false
   },
   {
-    name: 'ScreenEditNote',
-    component: Screens.ScreenEditNote,
+    name: 'ScreenNoteDetails',
+    component: Screens.ScreenNoteDetails,
     isHeader: false
   }
 ];
