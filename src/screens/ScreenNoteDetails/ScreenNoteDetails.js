@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text} from '../../components/main';
 
-const ScreenEditNote = () => {
+const ScreenNoteDetails = () => {
   return <View></View>;
 };
 
-export default ScreenEditNote;
+export default ScreenNoteDetails;
