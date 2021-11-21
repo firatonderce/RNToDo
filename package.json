@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "update-packages": "npm install && cd ios && pod install && cd ..",
+    "svg": "node src/bin/gen-svg.js && eslint src/core/icons.js --fix",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -15,15 +16,18 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@react-navigation/stack": "^6.0.11",
+    "babel-plugin-inline-import": "^3.0.0",
     "jslint": "^0.12.1",
     "react": "17.0.2",
     "react-native": "0.66.3",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-safe-area-context": "^3.3.2",
-    "react-native-screens": "^3.9.0"
+    "react-native-screens": "^3.9.0",
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",

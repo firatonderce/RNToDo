@@ -6,19 +6,23 @@ const colorPalette = {
 };
 
 const componentColors = {
-  NoteComponent: {
+  SearchBarComponent: {
+    backgroundColor: colorPalette.darkgrey
+  },
+  TodoComponent: {
     backgroundColor: colorPalette.darkgrey,
-    textColor: colorPalette.white,
-    dateTextColor: colorPalette.fadedWhite
+    titleColor: colorPalette.white,
+    dateTextColor: colorPalette.fadedWhite,
+    statusBackground: colorPalette.white
   }
 };
 
 const screenColors = {
-  ScreenNotes: {
+  ScreenTodos: {
     backgroundColor: colorPalette.honey,
     textColor: colorPalette.white
   },
-  ScreenNoteDetails: {
+  ScreenTodoDetails: {
     backgroundColor: colorPalette.darkgrey,
     titleFieldBackgroundColor: colorPalette.honey,
     texts: colorPalette.white

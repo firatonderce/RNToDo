@@ -2,13 +2,13 @@ import Screens from '../screens';
 
 const routes = [
   {
-    name: 'ScreenNotes',
-    component: Screens.ScreenNotes,
+    name: 'ScreenTodos',
+    component: Screens.ScreenTodos,
     isHeader: false
   },
   {
-    name: 'ScreenNoteDetails',
-    component: Screens.ScreenNoteDetails,
+    name: 'ScreenTodoDetails',
+    component: Screens.ScreenTodoDetails,
     isHeader: false
   }
 ];
