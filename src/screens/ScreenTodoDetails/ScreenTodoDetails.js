@@ -11,6 +11,7 @@ import getColors from '../../core/colors';
 
 const ScreenNoteDetails = ({route}) => {
   const {params} = route;
+  const {addOrEditToDo} = params;
   const [toDo, setToDo] = useState(params.toDo);
 
   return (
@@ -33,7 +34,7 @@ const ScreenNoteDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <AddButton />
+        <AddButton onPress={() => addOrEditToDo({toDo})} />
       </View>
     </SafeAreaView>
   );
@@ -48,12 +49,19 @@ const styles = StyleSheet.create({
   },
   titleInput: {
     backgroundColor: colors.titleFieldBackgroundColor,
+    color: colors.texts,
     height: '10%',
     fontSize: 25,
-    color: colors.texts
+    paddingLeft: '5%',
+    paddingRight: '5%'
   },
   detailBox: {height: '80%'},
-  detailsInput: {fontSize: 25, color: colors.texts},
+  detailsInput: {
+    color: colors.texts,
+    fontSize: 25,
+    paddingLeft: '5%',
+    paddingRight: '5%'
+  },
   addButtonBox: {width: '100%', alignItems: 'flex-end', paddingRight: '5%'}
 });
 export default ScreenNoteDetails;

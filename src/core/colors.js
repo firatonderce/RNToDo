@@ -1,13 +1,14 @@
 const colorPalette = {
   honey: '#E2B357',
   darkgrey: '#575454',
-  white: '#FFFFFF', // EAEAEA
+  white: '#FFFFFF',
   fadedWhite: '#968E8E'
 };
 
 const componentColors = {
   SearchBarComponent: {
-    backgroundColor: colorPalette.darkgrey
+    backgroundColor: colorPalette.darkgrey,
+    fontColor: colorPalette.white
   },
   TodoComponent: {
     backgroundColor: colorPalette.darkgrey,

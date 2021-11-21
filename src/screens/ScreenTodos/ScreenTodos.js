@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -44,13 +44,35 @@ const toDotemp = [
 ];
 
 const newTodo = () => {
-  return toDoModel;
+  return {...toDoModel, id: Math.random()};
 };
 
 const ScreenTodos = () => {
   const [toDos, setToDos] = useState(toDotemp);
   const [toDosToDisplay, setToDosToDisplay] = useState(toDos);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    setToDosToDisplay(toDos);
+  }, [toDos]);
+
+  const navigateToDetailScreen = index => {
+    const toDo = toDos[index] ? toDos[index] : newTodo();
+    return navigation.navigate('ScreenTodoDetails', {toDo, addOrEditToDo});
+  };
+
+  const addOrEditToDo = ({toDo}) => {
+    const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
+    return setToDos(oldTodos => {
+      const updatedTodos = [...oldTodos];
+      if (index != -1) {
+        updatedTodos[index] = toDo;
+        return updatedTodos;
+      }
+      updatedTodos.unshift(toDo);
+      return updatedTodos;
+    });
+  };
 
   const searchTodo = text => {
     const searchInput = text?.toLowerCase();
@@ -62,11 +84,6 @@ const ScreenTodos = () => {
         return toDo;
     });
     setToDosToDisplay(results);
-  };
-
-  const navigateToDetailScreen = index => {
-    const toDo = toDos[index] ? toDos[index] : newTodo();
-    return navigation.navigate('ScreenTodoDetails', {toDo});
   };
 
   const changeToDoStatus = (index, newStatus) => {
@@ -110,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
     alignItems: 'center'
   },
-  scrollView: {width: '100%'},
+  scrollView: {width: '100%', marginBottom: '1.5%'},
   contentContainer: {alignItems: 'center'},
   addButton: {
     width: '100%',

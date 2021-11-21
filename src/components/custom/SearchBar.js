@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: colors.backgroundColor,
     borderRadius: 35,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: '1.5%'
   },
   iconBox: {
     width: '10%',
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
     width: '80%',
     height: '60%',
     alignSelf: 'center',
-    fontSize: 18
+    fontSize: 18,
+    color: colors.fontColor
   }
 });
 
