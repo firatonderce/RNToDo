@@ -3,10 +3,13 @@ import {
   SafeAreaView,
   ScrollView,
   View,
-  StyleSheet
-} from '../../components/main';
+  StyleSheet,
+  SearchBar,
+  ToDo,
+  AddButton
+} from '../../components';
 import getColors from '../../core/colors';
-import {SearchBar, ToDo, AddButton} from '../../components';
+import {toDoModel} from '../../model/todo';
 import {useNavigation} from '@react-navigation/core';
 
 const toDotemp = [
@@ -36,12 +39,18 @@ const toDotemp = [
   }
 ];
 
+const newTodo = () => {
+  console.log('deneme', toDoModel);
+  return toDoModel;
+};
+
 const ScreenTodos = () => {
   const [toDos, setToDos] = useState(toDotemp);
   const navigation = useNavigation();
 
   const navigateToDetailScreen = index => {
-    return navigation.navigate('ScreenTodoDetails', {toDos});
+    const toDo = toDos[index] ? toDos[index] : newTodo();
+    return navigation.navigate('ScreenTodoDetails', {toDo});
   };
 
   const changeToDoStatus = (index, newStatus) => {

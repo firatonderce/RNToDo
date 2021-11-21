@@ -25,6 +25,7 @@ const screenColors = {
   ScreenTodoDetails: {
     backgroundColor: colorPalette.darkgrey,
     titleFieldBackgroundColor: colorPalette.honey,
+    placeHolderColor: 'rgba(255, 255, 255, 0.65)',
     texts: colorPalette.white
   }
 };

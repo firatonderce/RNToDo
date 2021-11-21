@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Dimensions, StyleSheet} from '../index';
 import {SvgIconDoneLight} from '../../core/icons';
-import {statuses} from '../../config/todo';
+import {statuses} from '../../model/todo';
 import getColors from '../../core/colors';
 
 const {DONE, TODO} = statuses;

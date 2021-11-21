@@ -1,6 +1,7 @@
-export const toDo = {
+export const toDoModel = {
   title: '',
   date: '',
+  details: '',
   status: ''
 };
 
