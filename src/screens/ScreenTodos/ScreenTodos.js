@@ -15,38 +15,54 @@ import {useNavigation} from '@react-navigation/core';
 const toDotemp = [
   {
     id: 1,
-    title: 'todo 1-2-3-4-5.',
+    title: '1',
     date: 'Çar, 22 Eyl 2021',
+    details: 'gokce',
     status: 'done'
   },
   {
     id: 2,
-    title: 'todo 1-2-3-4-5.',
+    title: '2',
     date: 'Çar, 22 Eyl 2021',
+    details: 'firat',
     status: 'todo'
   },
   {
     id: 2,
-    title: 'todo 1-2-3-4-5.',
+    title: '3',
     date: 'Çar, 22 Eyl 2021',
+    details: 'deneme',
     status: 'todo'
   },
   {
     id: 2,
-    title: 'todo 1-2-3-4-5.',
+    title: '4',
+    details: 'deneme',
     date: 'Çar, 22 Eyl 2021',
     status: 'todo'
   }
 ];
 
 const newTodo = () => {
-  console.log('deneme', toDoModel);
   return toDoModel;
 };
 
 const ScreenTodos = () => {
   const [toDos, setToDos] = useState(toDotemp);
+  const [toDosToDisplay, setToDosToDisplay] = useState(toDos);
   const navigation = useNavigation();
+
+  const searchTodo = text => {
+    const searchInput = text?.toLowerCase();
+    const results = toDos.filter(toDo => {
+      if (
+        toDo?.title?.includes(searchInput) ||
+        toDo?.details?.includes(searchInput)
+      )
+        return toDo;
+    });
+    setToDosToDisplay(results);
+  };
 
   const navigateToDetailScreen = index => {
     const toDo = toDos[index] ? toDos[index] : newTodo();
@@ -62,7 +78,7 @@ const ScreenTodos = () => {
   };
 
   const displayTodos = () => {
-    return toDos.map((toDo, index) => (
+    return toDosToDisplay.map((toDo, index) => (
       <ToDo
         key={index}
         toDo={toDo}
@@ -74,7 +90,7 @@ const ScreenTodos = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <SearchBar />
+      <SearchBar onChangeText={searchTodo} />
       <ScrollView
         contentContainerStyle={styles.contentContainer}
         style={styles.scrollView}>
