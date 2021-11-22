@@ -15,14 +15,19 @@ const ScreenNoteDetails = ({route}) => {
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
 
-  const updateToDo = () => {
-    const keys = Object.keys(oldVersion);
-    let results = keys.map(key => oldVersion[key] == toDo[key]);
-    if (results.some(result => result === false)) {
+  const updateOrAddTodo = () => {
+    const shouldEdit = checkIfAnyUpdatesAvailable();
+    if (shouldEdit) {
       setOldVersion(toDo);
-      addOrEditToDo(toDo);
+      return addOrEditToDo(toDo);
     }
   };
+
+  const checkIfAnyUpdatesAvailable = () => {
+    const keys = Object.keys(oldVersion);
+    return keys.some(key => oldVersion[key] != toDo[key]);
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <TextInput
@@ -43,7 +48,7 @@ const ScreenNoteDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <AddButton onPress={updateToDo} />
+        <AddButton onPress={updateOrAddTodo} />
       </View>
     </SafeAreaView>
   );

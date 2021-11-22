@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
-    borderWidth: 1
+    alignContent: 'center'
   }
 });
 
