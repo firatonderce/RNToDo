@@ -13,7 +13,7 @@ const ToDo = ({toDo, onPressItem, changeToDoStatus}) => {
   return (
     <View key={id} style={styles.toDo}>
       <TouchableOpacity onPress={onPressItem} style={styles.firstRow}>
-        <Text style={styles.titleBox} text={title} />
+        <Text style={styles.titleBox} text={title ? title : 'Untitled'} />
         <Text style={styles.dateBox} text={date} />
       </TouchableOpacity>
       <View style={styles.secondRow}>

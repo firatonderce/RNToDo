@@ -62,9 +62,9 @@ const ScreenTodos = () => {
     return navigation.navigate('ScreenTodoDetails', {toDo, addOrEditToDo});
   };
 
-  const addOrEditToDo = ({toDo}) => {
+  const addOrEditToDo = toDo => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
-    return setToDos(oldTodos => {
+    setToDos(oldTodos => {
       const updatedTodos = [...oldTodos];
       if (index != -1) {
         updatedTodos[index] = toDo;
@@ -73,6 +73,7 @@ const ScreenTodos = () => {
       updatedTodos.unshift(toDo);
       return updatedTodos;
     });
+    return navigation.goBack();
   };
 
   const searchTodo = text => {
@@ -81,8 +82,8 @@ const ScreenTodos = () => {
     setToDosToDisplay(
       toDos.filter(toDo => {
         if (
-          toDo.title.includes(searchInput) ||
-          toDo.details.includes(searchInput)
+          toDo.title?.toLowerCase()?.includes(searchInput) ||
+          toDo.details?.toLowerCase()?.includes(searchInput)
         )
           return toDo;
       })

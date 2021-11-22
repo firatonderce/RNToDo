@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -12,8 +12,17 @@ import getColors from '../../core/colors';
 const ScreenNoteDetails = ({route}) => {
   const {params} = route;
   const {addOrEditToDo} = params;
-  const [toDo, setToDo] = useState(params.toDo);
+  const [oldVersion, setOldVersion] = useState(params.toDo);
+  const [toDo, setToDo] = useState(oldVersion);
 
+  const updateToDo = () => {
+    const keys = Object.keys(oldVersion);
+    let results = keys.map(key => oldVersion[key] == toDo[key]);
+    if (results.some(result => result === false)) {
+      setOldVersion(toDo);
+      addOrEditToDo(toDo);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <TextInput
@@ -34,7 +43,7 @@ const ScreenNoteDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <AddButton onPress={() => addOrEditToDo({toDo})} />
+        <AddButton onPress={updateToDo} />
       </View>
     </SafeAreaView>
   );
