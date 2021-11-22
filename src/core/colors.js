@@ -15,6 +15,9 @@ const componentColors = {
     titleColor: colorPalette.white,
     dateTextColor: colorPalette.fadedWhite,
     statusBackground: colorPalette.white
+  },
+  NavigationHeader: {
+    backgroundColor: colorPalette.darkgrey
   }
 };
 
