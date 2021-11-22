@@ -49,15 +49,16 @@ const newTodo = () => {
 
 const ScreenTodos = () => {
   const [toDos, setToDos] = useState(toDotemp);
-  const [toDosToDisplay, setToDosToDisplay] = useState(toDos);
+  const [toDosToDisplay, setToDosToDisplay] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
   const navigation = useNavigation();
 
   useEffect(() => {
-    setToDosToDisplay(toDos);
+    return searchTodo(searchWord);
   }, [toDos]);
 
   const navigateToDetailScreen = index => {
-    const toDo = toDos[index] ? toDos[index] : newTodo();
+    const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newTodo();
     return navigation.navigate('ScreenTodoDetails', {toDo, addOrEditToDo});
   };
 
@@ -76,14 +77,16 @@ const ScreenTodos = () => {
 
   const searchTodo = text => {
     const searchInput = text?.toLowerCase();
-    const results = toDos.filter(toDo => {
-      if (
-        toDo?.title?.includes(searchInput) ||
-        toDo?.details?.includes(searchInput)
-      )
-        return toDo;
-    });
-    setToDosToDisplay(results);
+    setSearchWord(searchInput);
+    setToDosToDisplay(
+      toDos.filter(toDo => {
+        if (
+          toDo.title.includes(searchInput) ||
+          toDo.details.includes(searchInput)
+        )
+          return toDo;
+      })
+    );
   };
 
   const changeToDoStatus = (index, newStatus) => {
