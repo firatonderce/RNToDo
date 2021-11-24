@@ -17,7 +17,7 @@ const routes = [
         icon={'remove'}
         route={{
           routeName: 'ScreenTodoDetails',
-          params: {deleteNote: true}
+          params: {triggerDelete: true}
         }}
       />
     )

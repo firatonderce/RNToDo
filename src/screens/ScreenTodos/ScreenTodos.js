@@ -59,7 +59,11 @@ const ScreenTodos = () => {
 
   const navigateToDetailScreen = index => {
     const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newTodo();
-    return navigation.navigate('ScreenTodoDetails', {toDo, addOrEditToDo});
+    return navigation.navigate('ScreenTodoDetails', {
+      toDo,
+      addOrEditToDo,
+      deleteTodo
+    });
   };
 
   const addOrEditToDo = toDo => {
@@ -74,6 +78,10 @@ const ScreenTodos = () => {
       return updatedTodos;
     });
     return navigation.goBack();
+  };
+
+  const deleteTodo = toDo => {
+    return null;
   };
 
   const searchTodo = text => {

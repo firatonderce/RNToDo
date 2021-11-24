@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+  Alert,
   SafeAreaView,
   View,
   TextInput,
@@ -9,15 +10,16 @@ import {
 
 import getColors from '../../core/colors';
 
-const ScreenNoteDetails = ({route}) => {
+const ScreenTodoDetails = ({route}) => {
   const {params} = route;
-  const {addOrEditToDo} = params;
+  const {addOrEditToDo, deleteTodo} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
+  console.log('sa', route);
 
   useEffect(() => {
-    if (route.params.deleteNote) {
-      return deleteNote();
+    if (route.params.triggerDelete) {
+      return triggerDelete();
     }
   }, [route.params]);
 
@@ -34,8 +36,14 @@ const ScreenNoteDetails = ({route}) => {
     return keys.some(key => oldVersion[key] != toDo[key]);
   };
 
-  const deleteNote = () => {
-    console.log('delete note activated', toDo);
+  const triggerDelete = () => {
+    Alert.alert('Delete Todo', 'Are you sure you want to delete todo ?', [
+      {
+        text: 'Cancel',
+        style: 'cancel'
+      },
+      {text: 'OK', onPress: () => deleteTodo(toDo)}
+    ]);
   };
 
   return (
@@ -88,4 +96,4 @@ const styles = StyleSheet.create({
   },
   addButtonBox: {width: '100%', alignItems: 'flex-end', paddingRight: '5%'}
 });
-export default ScreenNoteDetails;
+export default ScreenTodoDetails;

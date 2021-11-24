@@ -18,8 +18,9 @@ const RootStack = () => {
               key={screen.name}
               name={screen.name}
               component={screen.component}
-              options={({route}) => {
+              options={() => {
                 return {
+                  title: screen.title ? screen.title : '',
                   headerShown: screen.isHeader,
                   headerLeft: () => (
                     <ButtonHeader icon={'left'} stack={screen || {}} />
