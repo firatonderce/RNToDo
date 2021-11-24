@@ -8,7 +8,6 @@ import TouchableOpacity from './TouchableOpacity';
 import Dimensions from './Dimensions';
 import Alert from './Alert';
 import LogBox from './LogBox';
-import BackHandler from './BackHandler';
 
 export {
   SafeAreaView,
@@ -20,6 +19,5 @@ export {
   Dimensions,
   StyleSheet,
   Alert,
-  LogBox,
-  BackHandler
+  LogBox
 };

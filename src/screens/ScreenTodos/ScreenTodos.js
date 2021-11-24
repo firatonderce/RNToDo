@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import {useNavigation} from '@react-navigation/core';
 import {
   SafeAreaView,
   ScrollView,
   View,
-  Alert,
   StyleSheet,
   SearchBar,
   ToDo,
-  AddButton,
-  BackHandler
+  AddButton
 } from '../../components';
 import getColors from '../../core/colors';
 import {toDoModel} from '../../model/todo';
-import {useNavigation} from '@react-navigation/core';
 import AsyncStorageManager from '../../services/AsyncStorageManager';
 
 const newToDo = () => {
@@ -30,31 +28,17 @@ const ScreenToDos = () => {
     getToDosFromStorage();
   }, []);
 
-  const getToDosFromStorage = async () => {
-    const toDos = false; //await AsyncStorageManager.getToDosFromStorage(toDos);
-    if (!toDos)
-      return Alert.alert(
-        "Couldn't get todos from storage",
-        'Check device permissions',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              console.log('pressed');
-              return BackHandler.exitApp();
-            }
-          }
-        ]
-      );
-    setToDos(toDos);
-    return setInitialized(true);
-  };
-
   useEffect(() => {
     if (!initialized) return;
     AsyncStorageManager.setToDosToStorage(toDos);
     return searchToDo(searchWord);
   }, [toDos]);
+
+  const getToDosFromStorage = async () => {
+    const toDos = await AsyncStorageManager.getToDosFromStorage(toDos);
+    setToDos(toDos);
+    return setInitialized(true);
+  };
 
   const navigateToDetailScreen = index => {
     const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newToDo();

@@ -1,5 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from '../components/index';
+import RNExitApp from 'react-native-exit-app';
+import {Alert} from '../components';
+
+const ErrorHandler = () => {
+  return Alert.alert(
+    "Couldn't get todos from storage",
+    'Check device permissions',
+    [
+      {
+        text: 'OK',
+        onPress: () => {
+          return RNExitApp.exitApp();
+        }
+      }
+    ]
+  );
+};
 
 class AsyncStorageManager {
   toDos = [];
@@ -20,7 +36,7 @@ class AsyncStorageManager {
       return true;
     } catch (err) {
       console.log('An Error Occured when trying to set toDos => ', err);
-      return false;
+      return ErrorHandler();
     }
   };
 
@@ -31,7 +47,7 @@ class AsyncStorageManager {
       return this.getToDos();
     } catch (err) {
       console.log('An Error Occured when trying to get toDos => ', err);
-      return false;
+      return ErrorHandler();
     }
   };
 }
