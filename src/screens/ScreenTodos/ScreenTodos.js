@@ -81,7 +81,14 @@ const ScreenTodos = () => {
   };
 
   const deleteTodo = toDo => {
-    return null;
+    const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
+    if (index == -1) return;
+    setToDos(oldTodos => {
+      const updatedTodos = [...oldTodos];
+      updatedTodos.splice(index, 1);
+      return updatedTodos;
+    });
+    return navigation.goBack();
   };
 
   const searchTodo = text => {

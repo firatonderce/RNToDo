@@ -26,7 +26,7 @@ const ButtonHeader = props => {
       return;
     }
     props.route && (props.route.routeName || props.route.params)
-      ? navigation.navigate(props.route.routeName, {...props.route.params})
+      ? navigation.setParams(props.route.params)
       : navigation.goBack(null);
   };
 

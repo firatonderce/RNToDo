@@ -15,7 +15,6 @@ const ScreenTodoDetails = ({route}) => {
   const {addOrEditToDo, deleteTodo} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
-  console.log('sa', route);
 
   useEffect(() => {
     if (route.params.triggerDelete) {
