@@ -12,7 +12,15 @@ const routes = [
     name: 'ScreenTodoDetails',
     component: Screens.ScreenTodoDetails,
     isHeader: true,
-    headerRight: onPress => <ButtonHeader icon={'remove'} onPress={onPress} />
+    headerRight: () => (
+      <ButtonHeader
+        icon={'remove'}
+        route={{
+          routeName: 'ScreenTodoDetails',
+          params: {deleteNote: true}
+        }}
+      />
+    )
   }
 ];
 

@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   View,
   TextInput,
-  AddButton,
+  SaveButton,
   StyleSheet
 } from '../../components';
 
@@ -14,6 +14,12 @@ const ScreenNoteDetails = ({route}) => {
   const {addOrEditToDo} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
+
+  useEffect(() => {
+    if (route.params.deleteNote) {
+      return deleteNote();
+    }
+  }, [route.params]);
 
   const updateOrAddTodo = () => {
     const shouldEdit = checkIfAnyUpdatesAvailable();
@@ -26,6 +32,10 @@ const ScreenNoteDetails = ({route}) => {
   const checkIfAnyUpdatesAvailable = () => {
     const keys = Object.keys(oldVersion);
     return keys.some(key => oldVersion[key] != toDo[key]);
+  };
+
+  const deleteNote = () => {
+    console.log('delete note activated', toDo);
   };
 
   return (
@@ -48,7 +58,7 @@ const ScreenNoteDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <AddButton onPress={updateOrAddTodo} />
+        <SaveButton onPress={updateOrAddTodo} />
       </View>
     </SafeAreaView>
   );

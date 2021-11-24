@@ -2,14 +2,14 @@ import React, {memo} from 'react';
 import {View, TouchableOpacity} from '../../components/index';
 import {useNavigation} from '@react-navigation/native';
 
-import {SvgIconTrashLight} from '../../core/icons';
+import {SvgIconLeftArrowLight, SvgIconTrashLight} from '../../core/icons';
 
 const ButtonHeader = props => {
   const navigation = useNavigation();
   const icons = {
     left: {
       style: {width: 20, height: 20, margin: 20},
-      source: () => <SvgIconTrashLight />
+      source: () => <SvgIconLeftArrowLight />
     },
 
     remove: {
@@ -19,10 +19,9 @@ const ButtonHeader = props => {
   };
 
   if (!icons[props.icon]) return null;
-  console.log('icon', props.icon, 'onpress', props.onPress);
+
   const handleClick = () => {
     if (props.onPress) {
-      return console.log('onpr', props.onPress);
       props.onPress();
       return;
     }
