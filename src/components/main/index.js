@@ -6,6 +6,7 @@ import TextInput from './TextInput';
 import StyleSheet from './StyleSheet';
 import TouchableOpacity from './TouchableOpacity';
 import Dimensions from './Dimensions';
+import Alert from './Alert';
 
 export {
   SafeAreaView,
@@ -15,5 +16,6 @@ export {
   TextInput,
   TouchableOpacity,
   Dimensions,
-  StyleSheet
+  StyleSheet,
+  Alert
 };

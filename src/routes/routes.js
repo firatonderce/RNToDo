@@ -1,4 +1,6 @@
+import React from 'react';
 import Screens from '../screens';
+import ButtonHeader from '../navigation/components/ButtonHeader';
 
 const routes = [
   {
@@ -9,7 +11,16 @@ const routes = [
   {
     name: 'ScreenTodoDetails',
     component: Screens.ScreenTodoDetails,
-    isHeader: false
+    isHeader: true,
+    headerRight: () => (
+      <ButtonHeader
+        icon={'remove'}
+        route={{
+          routeName: 'ScreenTodoDetails',
+          params: {triggerDelete: true}
+        }}
+      />
+    )
   }
 ];
 

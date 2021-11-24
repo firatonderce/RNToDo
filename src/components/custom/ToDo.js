@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Dimensions, StyleSheet} from '../index';
 import {SvgIconDoneLight} from '../../core/icons';
-import {statuses} from '../../config/todo';
+import {statuses} from '../../model/todo';
 import getColors from '../../core/colors';
 
 const {DONE, TODO} = statuses;
@@ -13,7 +13,7 @@ const ToDo = ({toDo, onPressItem, changeToDoStatus}) => {
   return (
     <View key={id} style={styles.toDo}>
       <TouchableOpacity onPress={onPressItem} style={styles.firstRow}>
-        <Text style={styles.titleBox} text={title} />
+        <Text style={styles.titleBox} text={title ? title : 'Untitled'} />
         <Text style={styles.dateBox} text={date} />
       </TouchableOpacity>
       <View style={styles.secondRow}>
@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
-    borderWidth: 1
+    alignContent: 'center'
   }
 });
 

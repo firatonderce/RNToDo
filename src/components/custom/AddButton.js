@@ -4,7 +4,7 @@ import {SvgIconAddLight} from '../../core/icons';
 
 const AddButton = ({onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={() => onPress()}>
       <SvgIconAddLight />
     </TouchableOpacity>
   );
