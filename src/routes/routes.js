@@ -4,19 +4,19 @@ import ButtonHeader from '../navigation/components/ButtonHeader';
 
 const routes = [
   {
-    name: 'ScreenTodos',
-    component: Screens.ScreenTodos,
+    name: 'ScreenToDos',
+    component: Screens.ScreenToDos,
     isHeader: false
   },
   {
-    name: 'ScreenTodoDetails',
-    component: Screens.ScreenTodoDetails,
+    name: 'ScreenToDoDetails',
+    component: Screens.ScreenToDoDetails,
     isHeader: true,
     headerRight: () => (
       <ButtonHeader
         icon={'remove'}
         route={{
-          routeName: 'ScreenTodoDetails',
+          routeName: 'ScreenToDoDetails',
           params: {triggerDelete: true}
         }}
       />

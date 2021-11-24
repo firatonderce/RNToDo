@@ -1,1 +1,1 @@
-export {default} from './ScreenTodoDetails';
+export {default} from './ScreenToDoDetails';

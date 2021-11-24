@@ -10,9 +10,9 @@ import {
 
 import getColors from '../../core/colors';
 
-const ScreenTodoDetails = ({route}) => {
+const ScreenToDoDetails = ({route}) => {
   const {params} = route;
-  const {addOrEditToDo, deleteTodo} = params;
+  const {addOrEditToDo, deleteToDo} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
 
@@ -22,7 +22,7 @@ const ScreenTodoDetails = ({route}) => {
     }
   }, [route.params]);
 
-  const updateOrAddTodo = () => {
+  const updateOrAddToDo = () => {
     const shouldEdit = checkIfAnyUpdatesAvailable();
     if (shouldEdit) {
       setOldVersion(toDo);
@@ -41,7 +41,7 @@ const ScreenTodoDetails = ({route}) => {
         text: 'Cancel',
         style: 'cancel'
       },
-      {text: 'OK', onPress: () => deleteTodo(toDo)}
+      {text: 'OK', onPress: () => deleteToDo(toDo)}
     ]);
   };
 
@@ -65,13 +65,13 @@ const ScreenTodoDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <SaveButton onPress={updateOrAddTodo} />
+        <SaveButton onPress={updateOrAddToDo} />
       </View>
     </SafeAreaView>
   );
 };
 
-const colors = getColors('ScreenTodoDetails');
+const colors = getColors('ScreenToDoDetails');
 
 const styles = StyleSheet.create({
   safeAreaView: {
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
   },
   addButtonBox: {width: '100%', alignItems: 'flex-end', paddingRight: '5%'}
 });
-export default ScreenTodoDetails;
+export default ScreenToDoDetails;
