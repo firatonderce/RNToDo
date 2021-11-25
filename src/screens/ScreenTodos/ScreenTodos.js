@@ -29,7 +29,6 @@ const ScreenToDos = () => {
 
   useEffect(() => {
     getToDosFromStorage();
-    console.log('tt', navigationTypes);
   }, []);
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const ScreenToDos = () => {
 
   const navigateToDetailScreen = (type, index = -1) => {
     const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newToDo();
-    console.log('type', type);
     return navigation.navigate('ScreenToDoDetails', {
       type,
       toDo,
