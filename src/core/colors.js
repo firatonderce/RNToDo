@@ -16,6 +16,12 @@ const componentColors = {
     dateTextColor: colorPalette.fadedWhite,
     statusBackground: colorPalette.white
   },
+  NoToDosComponent: {
+    textColor: colorPalette.darkgrey
+  },
+  NoToDosFoundComponent: {
+    textColor: colorPalette.darkgrey
+  },
   NavigationHeader: {
     backgroundColor: colorPalette.darkgrey
   }

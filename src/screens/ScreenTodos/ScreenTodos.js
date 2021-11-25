@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   View,
+  Text,
   StyleSheet,
   SearchBar,
   ToDo,
@@ -12,6 +13,7 @@ import {
 import getColors from '../../core/colors';
 import {toDoModel} from '../../model/todo';
 import AsyncStorageManager from '../../services/AsyncStorageManager';
+import {NoToDos, NoToDosFound} from './components';
 
 const newToDo = () => {
   return {...toDoModel, id: Math.random()};
@@ -97,6 +99,8 @@ const ScreenToDos = () => {
   };
 
   const displayToDos = () => {
+    if (!toDos.length) return <NoToDos />;
+    if (!toDosToDisplay.length) return <NoToDosFound />;
     return toDosToDisplay.map((toDo, index) => (
       <ToDo
         key={index}
@@ -113,7 +117,7 @@ const ScreenToDos = () => {
       <ScrollView
         contentContainerStyle={styles.contentContainer}
         style={styles.scrollView}>
-        {displayToDos()}
+        {initialized && displayToDos()}
       </ScrollView>
       <View style={styles.addButton}>
         <AddButton onPress={navigateToDetailScreen} />
