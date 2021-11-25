@@ -14,6 +14,7 @@ import getColors from '../../core/colors';
 import {toDoModel} from '../../model/todo';
 import AsyncStorageManager from '../../services/AsyncStorageManager';
 import {NoToDos, NoToDosFound} from './components';
+import {navigationTypes} from '../../types';
 
 const newToDo = () => {
   return {...toDoModel, id: Math.random()};
@@ -28,6 +29,7 @@ const ScreenToDos = () => {
 
   useEffect(() => {
     getToDosFromStorage();
+    console.log('tt', navigationTypes);
   }, []);
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const ScreenToDos = () => {
 
   const navigateToDetailScreen = (type, index = -1) => {
     const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newToDo();
+    console.log('type', type);
     return navigation.navigate('ScreenToDoDetails', {
       type,
       toDo,
@@ -106,7 +109,7 @@ const ScreenToDos = () => {
       <ToDo
         key={index}
         toDo={toDo}
-        onPressItem={() => navigateToDetailScreen('edit', index)}
+        onPressItem={() => navigateToDetailScreen(navigationTypes.EDIT, index)}
         changeToDoStatus={newStatus => changeToDoStatus(index, newStatus)}
       />
     ));
@@ -121,7 +124,9 @@ const ScreenToDos = () => {
         {initialized && displayToDos()}
       </ScrollView>
       <View style={styles.addButton}>
-        <AddButton onPress={() => navigateToDetailScreen('create')} />
+        <AddButton
+          onPress={() => navigateToDetailScreen(navigationTypes.CREATE)}
+        />
       </View>
     </SafeAreaView>
   );

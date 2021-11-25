@@ -9,6 +9,7 @@ import {
 } from '../../components';
 
 import getColors from '../../core/colors';
+import {navigationTypes} from '../../types';
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
@@ -18,7 +19,7 @@ const ScreenToDoDetails = ({route}) => {
   const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
 
   useEffect(() => {
-    if (route.params.type == 'create') return;
+    if (route.params.type == navigationTypes.CREATE) return;
     if (route.params.triggerDelete) return triggerDelete();
   }, [route.params]);
 
