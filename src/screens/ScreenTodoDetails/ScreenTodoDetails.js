@@ -15,16 +15,20 @@ const ScreenToDoDetails = ({route}) => {
   const {addOrEditToDo, deleteToDo} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
+  const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
 
   useEffect(() => {
-    if (route.params.triggerDelete) {
-      return triggerDelete();
-    }
+    if (route.params.type == 'create') return;
+    if (route.params.triggerDelete) return triggerDelete();
   }, [route.params]);
 
+  useEffect(() => {
+    const isThereAnyChanges = checkIfAnyUpdatesAvailable();
+    return setIsThereAnyChanges(isThereAnyChanges);
+  }, [toDo]);
+
   const updateOrAddToDo = () => {
-    const shouldEdit = checkIfAnyUpdatesAvailable();
-    if (shouldEdit) {
+    if (isThereAnyChanges) {
       setOldVersion(toDo);
       return addOrEditToDo(toDo);
     }
@@ -65,7 +69,7 @@ const ScreenToDoDetails = ({route}) => {
         />
       </View>
       <View style={styles.addButtonBox}>
-        <SaveButton onPress={updateOrAddToDo} />
+        <SaveButton isActive={isThereAnyChanges} onPress={updateOrAddToDo} />
       </View>
     </SafeAreaView>
   );

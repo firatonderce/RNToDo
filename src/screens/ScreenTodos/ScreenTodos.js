@@ -34,7 +34,7 @@ const ScreenToDos = () => {
     if (!initialized) return;
     AsyncStorageManager.setToDosToStorage(toDos);
     return searchToDo(searchWord);
-  }, [toDos]);
+  }, [initialized, toDos]);
 
   const getToDosFromStorage = async () => {
     const toDos = await AsyncStorageManager.getToDosFromStorage(toDos);
@@ -42,9 +42,10 @@ const ScreenToDos = () => {
     return setInitialized(true);
   };
 
-  const navigateToDetailScreen = index => {
+  const navigateToDetailScreen = (type, index = -1) => {
     const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newToDo();
     return navigation.navigate('ScreenToDoDetails', {
+      type,
       toDo,
       addOrEditToDo,
       deleteToDo
@@ -105,7 +106,7 @@ const ScreenToDos = () => {
       <ToDo
         key={index}
         toDo={toDo}
-        onPressItem={() => navigateToDetailScreen(index)}
+        onPressItem={() => navigateToDetailScreen('edit', index)}
         changeToDoStatus={newStatus => changeToDoStatus(index, newStatus)}
       />
     ));
@@ -120,7 +121,7 @@ const ScreenToDos = () => {
         {initialized && displayToDos()}
       </ScrollView>
       <View style={styles.addButton}>
-        <AddButton onPress={navigateToDetailScreen} />
+        <AddButton onPress={() => navigateToDetailScreen('create')} />
       </View>
     </SafeAreaView>
   );
