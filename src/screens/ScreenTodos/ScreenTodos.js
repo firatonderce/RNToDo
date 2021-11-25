@@ -14,7 +14,7 @@ import getColors from '../../core/colors';
 import {toDoModel} from '../../model/todo';
 import AsyncStorageManager from '../../services/AsyncStorageManager';
 import {NoToDos, NoToDosFound} from './components';
-import {navigationTypes} from '../../types';
+import navigationTypes from '../../types/navigationTypes';
 
 const newToDo = () => {
   return {...toDoModel, id: Math.random()};

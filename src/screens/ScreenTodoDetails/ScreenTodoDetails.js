@@ -9,7 +9,7 @@ import {
 } from '../../components';
 
 import getColors from '../../core/colors';
-import {navigationTypes} from '../../types';
+import navigationTypes from '../../types/navigationTypes';
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
