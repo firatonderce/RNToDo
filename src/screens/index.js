@@ -1,4 +1,4 @@
-import ScreenTodos from './ScreenTodos';
-import ScreenTodoDetails from './ScreenTodoDetails';
+import ScreenToDos from './ScreenToDos';
+import ScreenToDoDetails from './ScreenToDoDetails';
 
-export default {ScreenTodos, ScreenTodoDetails};
+export default {ScreenToDos, ScreenToDoDetails};

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import {useNavigation} from '@react-navigation/core';
 import {
   SafeAreaView,
   ScrollView,
   View,
+  Text,
   StyleSheet,
   SearchBar,
   ToDo,
@@ -10,88 +12,73 @@ import {
 } from '../../components';
 import getColors from '../../core/colors';
 import {toDoModel} from '../../model/todo';
-import {useNavigation} from '@react-navigation/core';
+import AsyncStorageManager from '../../services/AsyncStorageManager';
+import {NoToDos, NoToDosFound} from './components';
+import navigationTypes from '../../types/navigationTypes';
 
-const toDotemp = [
-  {
-    id: 1,
-    title: '1',
-    date: 'Çar, 22 Eyl 2021',
-    details: 'gokce',
-    status: 'done'
-  },
-  {
-    id: 2,
-    title: '2',
-    date: 'Çar, 22 Eyl 2021',
-    details: 'firat',
-    status: 'todo'
-  },
-  {
-    id: 2,
-    title: '3',
-    date: 'Çar, 22 Eyl 2021',
-    details: 'deneme',
-    status: 'todo'
-  },
-  {
-    id: 2,
-    title: '4',
-    details: 'deneme',
-    date: 'Çar, 22 Eyl 2021',
-    status: 'todo'
-  }
-];
-
-const newTodo = () => {
+const newToDo = () => {
   return {...toDoModel, id: Math.random()};
 };
 
-const ScreenTodos = () => {
-  const [toDos, setToDos] = useState(toDotemp);
+const ScreenToDos = () => {
+  const [toDos, setToDos] = useState([]);
   const [toDosToDisplay, setToDosToDisplay] = useState([]);
+  const [initialized, setInitialized] = useState(false);
   const [searchWord, setSearchWord] = useState('');
   const navigation = useNavigation();
 
   useEffect(() => {
-    return searchTodo(searchWord);
-  }, [toDos]);
+    getToDosFromStorage();
+  }, []);
 
-  const navigateToDetailScreen = index => {
-    const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newTodo();
-    return navigation.navigate('ScreenTodoDetails', {
+  useEffect(() => {
+    if (!initialized) return;
+    AsyncStorageManager.setToDosToStorage(toDos);
+    return searchToDo(searchWord);
+  }, [initialized, toDos]);
+
+  const getToDosFromStorage = async () => {
+    const toDos = await AsyncStorageManager.getToDosFromStorage(toDos);
+    setToDos(toDos);
+    return setInitialized(true);
+  };
+
+  const navigateToDetailScreen = (type, index = -1) => {
+    const toDo = toDosToDisplay[index] ? toDosToDisplay[index] : newToDo();
+    return navigation.navigate('ScreenToDoDetails', {
+      type,
       toDo,
       addOrEditToDo,
-      deleteTodo
+      deleteToDo
     });
   };
 
   const addOrEditToDo = toDo => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
-    setToDos(oldTodos => {
-      const updatedTodos = [...oldTodos];
+    setToDos(oldToDos => {
+      const updatedToDos = [...oldToDos];
       if (index != -1) {
-        updatedTodos[index] = toDo;
-        return updatedTodos;
+        updatedToDos[index] = toDo;
+        return updatedToDos;
       }
-      updatedTodos.unshift(toDo);
-      return updatedTodos;
+      updatedToDos.unshift(toDo);
+      return updatedToDos;
     });
     return navigation.goBack();
   };
 
-  const deleteTodo = toDo => {
+  const deleteToDo = toDo => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
     if (index == -1) return;
-    setToDos(oldTodos => {
-      const updatedTodos = [...oldTodos];
-      updatedTodos.splice(index, 1);
-      return updatedTodos;
+    setToDos(oldToDos => {
+      const updatedToDos = [...oldToDos];
+      updatedToDos.splice(index, 1);
+      return updatedToDos;
     });
     return navigation.goBack();
   };
 
-  const searchTodo = text => {
+  const searchToDo = text => {
     const searchInput = text?.toLowerCase();
     setSearchWord(searchInput);
     setToDosToDisplay(
@@ -106,19 +93,21 @@ const ScreenTodos = () => {
   };
 
   const changeToDoStatus = (index, newStatus) => {
-    return setToDos(oldTodos => {
-      const updatedTodos = [...oldTodos];
-      updatedTodos[index].status = newStatus;
-      return updatedTodos;
+    return setToDos(oldToDos => {
+      const updatedToDos = [...oldToDos];
+      updatedToDos[index].status = newStatus;
+      return updatedToDos;
     });
   };
 
-  const displayTodos = () => {
+  const displayToDos = () => {
+    if (!toDos.length) return <NoToDos />;
+    if (!toDosToDisplay.length) return <NoToDosFound />;
     return toDosToDisplay.map((toDo, index) => (
       <ToDo
         key={index}
         toDo={toDo}
-        onPressItem={() => navigateToDetailScreen(index)}
+        onPressItem={() => navigateToDetailScreen(navigationTypes.EDIT, index)}
         changeToDoStatus={newStatus => changeToDoStatus(index, newStatus)}
       />
     ));
@@ -126,20 +115,22 @@ const ScreenTodos = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <SearchBar onChangeText={searchTodo} />
+      <SearchBar onChangeText={searchToDo} />
       <ScrollView
         contentContainerStyle={styles.contentContainer}
         style={styles.scrollView}>
-        {displayTodos()}
+        {initialized && displayToDos()}
       </ScrollView>
       <View style={styles.addButton}>
-        <AddButton onPress={navigateToDetailScreen} />
+        <AddButton
+          onPress={() => navigateToDetailScreen(navigationTypes.CREATE)}
+        />
       </View>
     </SafeAreaView>
   );
 };
 
-const colors = getColors('ScreenTodos');
+const colors = getColors('ScreenToDos');
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
@@ -155,4 +146,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ScreenTodos;
+export default ScreenToDos;

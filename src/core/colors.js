@@ -10,11 +10,17 @@ const componentColors = {
     backgroundColor: colorPalette.darkgrey,
     fontColor: colorPalette.white
   },
-  TodoComponent: {
+  ToDoComponent: {
     backgroundColor: colorPalette.darkgrey,
     titleColor: colorPalette.white,
     dateTextColor: colorPalette.fadedWhite,
     statusBackground: colorPalette.white
+  },
+  NoToDosComponent: {
+    textColor: colorPalette.darkgrey
+  },
+  NoToDosFoundComponent: {
+    textColor: colorPalette.darkgrey
   },
   NavigationHeader: {
     backgroundColor: colorPalette.darkgrey
@@ -22,11 +28,11 @@ const componentColors = {
 };
 
 const screenColors = {
-  ScreenTodos: {
+  ScreenToDos: {
     backgroundColor: colorPalette.honey,
     textColor: colorPalette.white
   },
-  ScreenTodoDetails: {
+  ScreenToDoDetails: {
     backgroundColor: colorPalette.darkgrey,
     titleFieldBackgroundColor: colorPalette.honey,
     placeHolderColor: 'rgba(255, 255, 255, 0.65)',

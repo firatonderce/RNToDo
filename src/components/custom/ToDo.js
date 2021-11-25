@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Dimensions, StyleSheet} from '../index';
+import {View, Text, TouchableOpacity, Dimensions, StyleSheet} from '../main';
 import {SvgIconDoneLight} from '../../core/icons';
 import {statuses} from '../../model/todo';
 import getColors from '../../core/colors';
 
 const {DONE, TODO} = statuses;
-const heightOfTodoItem = Dimensions.get('window').height / 10;
+const heightOfToDoItem = Dimensions.get('window').height / 10;
 
 const ToDo = ({toDo, onPressItem, changeToDoStatus}) => {
   const {id, title, date, status} = toDo;
@@ -27,13 +27,13 @@ const ToDo = ({toDo, onPressItem, changeToDoStatus}) => {
   );
 };
 
-const colors = getColors('TodoComponent');
+const colors = getColors('ToDoComponent');
 
 const styles = StyleSheet.create({
   toDo: {
     backgroundColor: colors.backgroundColor,
     borderRadius: 20,
-    height: heightOfTodoItem,
+    height: heightOfToDoItem,
     width: '90%',
     marginTop: '2.75%',
     flexDirection: 'row'

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, View, StyleSheet} from '../index';
+import {TextInput, View, StyleSheet} from '../main';
 import {SvgIconSearchBarIconLight} from '../../core/icons';
 import getColors from '../../core/colors';
 

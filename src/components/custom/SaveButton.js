@@ -1,15 +1,18 @@
 import React from 'react';
-import {TouchableOpacity} from '../index';
+import {View, TouchableOpacity} from '../index';
 import {
   SvgIconSaveButtonLight,
   SvgIconSaveButtonFadeLight
 } from '../../core/icons';
 
-const SaveButton = ({onPress}) => {
+const SaveButton = ({onPress, isActive}) => {
+  const SaveButtonComponent = isActive ? TouchableOpacity : View;
+  const Icon = isActive ? SvgIconSaveButtonLight : SvgIconSaveButtonFadeLight;
+
   return (
-    <TouchableOpacity onPress={() => onPress()}>
-      <SvgIconSaveButtonLight />
-    </TouchableOpacity>
+    <SaveButtonComponent onPress={() => onPress()}>
+      <Icon />
+    </SaveButtonComponent>
   );
 };
 
