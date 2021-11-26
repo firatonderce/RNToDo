@@ -81,7 +81,8 @@ const colors = getColors('ScreenToDoDetails');
 const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: colors.backgroundColor,
-    flex: 1
+    flex: 1,
+    paddingBottom: '5%'
   },
   titleInput: {
     backgroundColor: colors.titleFieldBackgroundColor,
@@ -91,13 +92,18 @@ const styles = StyleSheet.create({
     paddingLeft: '5%',
     paddingRight: '5%'
   },
-  detailBox: {height: '80%'},
+  detailBox: {height: '78%'},
   detailsInput: {
     color: colors.texts,
     fontSize: 25,
     paddingLeft: '5%',
     paddingRight: '5%'
   },
-  addButtonBox: {width: '100%', alignItems: 'flex-end', paddingRight: '5%'}
+  addButtonBox: {
+    width: '100%',
+    height: '12%',
+    alignItems: 'flex-end',
+    paddingRight: '5%'
+  }
 });
 export default ScreenToDoDetails;

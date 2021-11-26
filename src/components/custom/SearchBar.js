@@ -18,7 +18,7 @@ const colors = getColors('SearchBarComponent');
 
 const styles = StyleSheet.create({
   outerView: {
-    height: '8%',
+    height: '10%',
     width: '90%',
     alignSelf: 'center',
     backgroundColor: colors.backgroundColor,
@@ -34,9 +34,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: '80%',
-    height: '60%',
     alignSelf: 'center',
-    fontSize: 18,
+    fontSize: 20,
     color: colors.fontColor
   }
 });
