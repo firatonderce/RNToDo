@@ -39,8 +39,9 @@ class AsyncStorageManager {
 
   getToDosFromStorage = async () => {
     try {
-      const result = await AsyncStorage.getItem('toDos');
-      this.setToDos(JSON.parse(result));
+      const toDos = await AsyncStorage.getItem('toDos');
+      const result = toDos?.length ? JSON.parse(toDos) : [];
+      this.setToDos(result);
       return this.getToDos();
     } catch (err) {
       console.log('An Error Occured when trying to get toDos => ', err);
