@@ -27,8 +27,7 @@ const RootStack = () => {
                   ),
                   headerRight: screen.headerRight,
                   headerStyle: {
-                    backgroundColor: colors.backgroundColor,
-                    height: Platform.OS == 'ios' ? 100 : 80
+                    backgroundColor: colors.backgroundColor
                   }
                 };
               }}

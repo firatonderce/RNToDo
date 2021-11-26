@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   ScrollView,
   View,
-  Text,
   StyleSheet,
   SearchBar,
   ToDo,

@@ -3,18 +3,15 @@ import RNExitApp from 'react-native-exit-app';
 import {Alert} from '../components';
 
 const ErrorHandler = () => {
-  return Alert.alert(
-    "Couldn't get todos from storage",
-    'Check device permissions',
-    [
-      {
-        text: 'OK',
-        onPress: () => {
-          return RNExitApp.exitApp();
-        }
+  Alert.alert("Couldn't get todos from storage", 'Check device permissions', [
+    {
+      text: 'OK',
+      onPress: () => {
+        return RNExitApp.exitApp();
       }
-    ]
-  );
+    }
+  ]);
+  return [];
 };
 
 class AsyncStorageManager {
