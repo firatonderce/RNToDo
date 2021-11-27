@@ -9,6 +9,7 @@ import {
 } from '../../components';
 
 import getColors from '../../core/colors';
+import {getDate} from '../../utils/Date';
 import navigationTypes from '../../types/navigationTypes';
 
 const ScreenToDoDetails = ({route}) => {
@@ -28,10 +29,15 @@ const ScreenToDoDetails = ({route}) => {
     return setIsThereAnyChanges(isThereAnyChanges);
   }, [toDo]);
 
+  setInterval(() => {
+    getDate();
+  }, 1000);
   const updateOrAddToDo = () => {
     if (isThereAnyChanges) {
-      setOldVersion(toDo);
-      return addOrEditToDo(toDo);
+      const date = getDate();
+      const newTodo = {...toDo, date};
+      setOldVersion(newTodo);
+      return addOrEditToDo(newTodo);
     }
   };
 
