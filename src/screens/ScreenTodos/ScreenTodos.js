@@ -56,10 +56,7 @@ const ScreenToDos = () => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
     setToDos(oldToDos => {
       const updatedToDos = [...oldToDos];
-      if (index != -1) {
-        updatedToDos[index] = toDo;
-        return updatedToDos;
-      }
+      updatedToDos.splice(index, 1);
       updatedToDos.unshift(toDo);
       return updatedToDos;
     });
