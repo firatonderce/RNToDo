@@ -12,6 +12,15 @@ const routes = [
     name: 'ScreenToDoDetails',
     component: Screens.ScreenToDoDetails,
     isHeader: true,
+    headerLeft: () => (
+      <ButtonHeader
+        icon={'left'}
+        route={{
+          routeName: 'ScreenToDoDetails',
+          params: {triggerBack: true}
+        }}
+      />
+    ),
     headerRight: () => (
       <ButtonHeader
         icon={'remove'}

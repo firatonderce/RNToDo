@@ -10,6 +10,7 @@ import {
 
 import getColors from '../../core/colors';
 import {getDate} from '../../utils/Date';
+import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
 
 const ScreenToDoDetails = ({route}) => {
@@ -18,8 +19,10 @@ const ScreenToDoDetails = ({route}) => {
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
   const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
+    if (route.params.triggerBack) return triggerGoBack();
     if (route.params.type == navigationTypes.CREATE) return;
     if (route.params.triggerDelete) return triggerDelete();
   }, [route.params]);
@@ -29,9 +32,14 @@ const ScreenToDoDetails = ({route}) => {
     return setIsThereAnyChanges(isThereAnyChanges);
   }, [toDo]);
 
-  setInterval(() => {
-    getDate();
-  }, 1000);
+  const triggerGoBack = () => {
+    return isThereAnyChanges ? 'sa' : navigation.goBack();
+  };
+
+  const warnGoBack = () => {
+    // Alert.alert
+  };
+
   const updateOrAddToDo = () => {
     if (isThereAnyChanges) {
       const date = getDate();

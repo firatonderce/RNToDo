@@ -22,9 +22,9 @@ const RootStack = () => {
                 return {
                   title: screen.title ? screen.title : '',
                   headerShown: screen.isHeader,
-                  headerLeft: () => (
-                    <ButtonHeader icon={'left'} stack={screen || {}} />
-                  ),
+                  headerLeft: screen.headerLeft
+                    ? screen.headerLeft
+                    : () => <ButtonHeader icon={'left'} stack={screen || {}} />,
                   headerRight: screen.headerRight,
                   headerStyle: {
                     backgroundColor: colors.backgroundColor
