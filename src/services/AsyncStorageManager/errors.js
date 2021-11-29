@@ -10,4 +10,4 @@ const setToDosError = {
   acceptAction: () => RNExitApp.exitApp()
 };
 
-export {getToDosError, setToDosError};
+export default {getToDosError, setToDosError};

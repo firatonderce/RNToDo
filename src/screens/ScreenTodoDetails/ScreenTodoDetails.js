@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {
-  Alert,
   SafeAreaView,
   View,
   TextInput,
@@ -12,6 +11,8 @@ import getColors from '../../core/colors';
 import {getDate} from '../../utils/Date';
 import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
+import WarnHandler from '../../services/WarnHandler';
+import warns from './data/warns';
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
@@ -33,11 +34,19 @@ const ScreenToDoDetails = ({route}) => {
   }, [toDo]);
 
   const triggerGoBack = () => {
-    return isThereAnyChanges ? 'sa' : navigation.goBack();
+    return isThereAnyChanges ? warnGoBack() : navigation.goBack();
   };
 
   const warnGoBack = () => {
-    // Alert.alert
+    let acceptAction =
+      params.type == navigationTypes.CREATE
+        ? navigation.goBack
+        : () => deleteToDo(toDo);
+
+    return WarnHandler({
+      ...warns.goBack,
+      acceptAction
+    });
   };
 
   const updateOrAddToDo = () => {
@@ -55,13 +64,10 @@ const ScreenToDoDetails = ({route}) => {
   };
 
   const triggerDelete = () => {
-    Alert.alert('Delete Todo', 'Are you sure you want to delete todo ?', [
-      {
-        text: 'Cancel',
-        style: 'cancel'
-      },
-      {text: 'OK', onPress: () => deleteToDo(toDo)}
-    ]);
+    return WarnHandler({
+      ...warns.deleteToDo,
+      acceptAction: () => deleteToDo(toDo)
+    });
   };
 
   return (

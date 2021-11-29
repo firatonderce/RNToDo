@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ErrorHandler from '../ErrorHandler';
-import {getToDosError, setToDosError} from './errors';
+import errors from './errors';
 
 class AsyncStorageManager {
   toDos = [];
@@ -21,7 +21,7 @@ class AsyncStorageManager {
       return true;
     } catch (error) {
       console.log('An Error Occured when trying to set toDos => ', error);
-      return ErrorHandler(setToDosError);
+      return ErrorHandler(errors.setToDosError);
     }
   };
 
@@ -33,7 +33,7 @@ class AsyncStorageManager {
       return this.getToDos();
     } catch (error) {
       console.log('An Error Occured when trying to get toDos => ', error);
-      return ErrorHandler(getToDosError);
+      return ErrorHandler(errors.getToDosError);
     }
   };
 }
