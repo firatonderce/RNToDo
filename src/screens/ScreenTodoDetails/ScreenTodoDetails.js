@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   View,
   TextInput,
+  ToDoDetailsInput,
   SaveButton,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from '../../components';
 
 import getColors from '../../core/colors';
@@ -13,6 +14,8 @@ import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
 import WarnHandler from '../../services/WarnHandler';
 import warns from './data/warns';
+
+const heightOfApplyButtonBox = Dimensions.get('window').height * 0.12;
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
@@ -71,7 +74,7 @@ const ScreenToDoDetails = ({route}) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <View style={styles.ScreenView}>
       <TextInput
         placeholder="Title"
         value={toDo.title}
@@ -80,8 +83,9 @@ const ScreenToDoDetails = ({route}) => {
         placeholderTextColor={colors.placeHolderColor}
       />
       <View style={styles.detailBox}>
-        <TextInput
+        <ToDoDetailsInput
           placeholder="Statement"
+          heightOfApplyButtonBox={heightOfApplyButtonBox}
           value={toDo.details}
           multiline={true}
           onChangeText={text => setToDo({...toDo, details: text})}
@@ -92,14 +96,14 @@ const ScreenToDoDetails = ({route}) => {
       <View style={styles.addButtonBox}>
         <SaveButton isActive={isThereAnyChanges} onPress={updateOrAddToDo} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const colors = getColors('ScreenToDoDetails');
 
 const styles = StyleSheet.create({
-  safeAreaView: {
+  ScreenView: {
     backgroundColor: colors.backgroundColor,
     flex: 1,
     paddingBottom: '5%'
