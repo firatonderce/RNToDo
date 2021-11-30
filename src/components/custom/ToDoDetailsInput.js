@@ -27,7 +27,6 @@ const ToDoDetailsInput = ({
       'keyboardWillHide',
       onKeyboardHide
     );
-    console.log('height', marginBottom);
 
     return () => {
       keyboardDidShowListener.current.remove();
@@ -47,12 +46,14 @@ const ToDoDetailsInput = ({
         onChangeText={onChangeText}
         multiline={multiline}
         placeholderTextColor={placeholderTextColor}
+        onSubmitEditing={() => Keyboard.dismiss()}
         style={{
           ...style,
           marginBottom: marginBottom,
           width: '100%',
           height: '100%'
-        }}></TextInput>
+        }}
+      />
     </View>
   );
 };
