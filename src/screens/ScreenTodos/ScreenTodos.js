@@ -27,14 +27,13 @@ const ScreenToDos = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    getToDosFromStorage();
-  }, []);
-
-  useEffect(() => {
-    if (!initialized) return;
+    if (!initialized) {
+      getToDosFromStorage();
+      return;
+    }
     AsyncStorageManager.setToDosToStorage(toDos);
     return searchToDo(searchWord);
-  }, [initialized, toDos]);
+  }, [toDos]);
 
   const getToDosFromStorage = async () => {
     const toDos = await AsyncStorageManager.getToDosFromStorage(toDos);
