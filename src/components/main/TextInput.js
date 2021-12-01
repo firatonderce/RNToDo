@@ -7,10 +7,12 @@ const TextInputComponent = ({
   placeholder,
   onChangeText,
   placeholderTextColor,
-  multiline
+  multiline,
+  onSubmitEditing
 }) => {
   return (
     <TextInput
+      onSubmitEditing={onSubmitEditing}
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}

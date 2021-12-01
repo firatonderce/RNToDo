@@ -1,15 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {
-  Alert,
-  SafeAreaView,
   View,
   TextInput,
+  ToDoDetailsInput,
   SaveButton,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from '../../components';
 
 import getColors from '../../core/colors';
+import {getDate} from '../../utils/Date';
+import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
+import WarnHandler from '../../services/WarnHandler';
+import warns from './data/warns';
+
+const heightOfApplyButtonBox = Dimensions.get('window').height * 0.12;
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
@@ -17,8 +23,10 @@ const ScreenToDoDetails = ({route}) => {
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
   const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
+    if (route.params.triggerBack) return triggerGoBack();
     if (route.params.type == navigationTypes.CREATE) return;
     if (route.params.triggerDelete) return triggerDelete();
   }, [route.params]);
@@ -28,10 +36,28 @@ const ScreenToDoDetails = ({route}) => {
     return setIsThereAnyChanges(isThereAnyChanges);
   }, [toDo]);
 
+  const triggerGoBack = () => {
+    return isThereAnyChanges ? warnGoBack() : navigation.goBack();
+  };
+
+  const warnGoBack = () => {
+    let acceptAction =
+      params.type == navigationTypes.CREATE
+        ? navigation.goBack
+        : () => deleteToDo(toDo);
+
+    return WarnHandler({
+      ...warns.goBack,
+      acceptAction
+    });
+  };
+
   const updateOrAddToDo = () => {
     if (isThereAnyChanges) {
-      setOldVersion(toDo);
-      return addOrEditToDo(toDo);
+      const date = getDate();
+      const newTodo = {...toDo, date};
+      setOldVersion(newTodo);
+      return addOrEditToDo(newTodo);
     }
   };
 
@@ -41,17 +67,14 @@ const ScreenToDoDetails = ({route}) => {
   };
 
   const triggerDelete = () => {
-    Alert.alert('Delete Todo', 'Are you sure you want to delete todo ?', [
-      {
-        text: 'Cancel',
-        style: 'cancel'
-      },
-      {text: 'OK', onPress: () => deleteToDo(toDo)}
-    ]);
+    return WarnHandler({
+      ...warns.deleteToDo,
+      acceptAction: () => deleteToDo(toDo)
+    });
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <View style={styles.ScreenView}>
       <TextInput
         placeholder="Title"
         value={toDo.title}
@@ -60,8 +83,9 @@ const ScreenToDoDetails = ({route}) => {
         placeholderTextColor={colors.placeHolderColor}
       />
       <View style={styles.detailBox}>
-        <TextInput
+        <ToDoDetailsInput
           placeholder="Statement"
+          heightOfApplyButtonBox={heightOfApplyButtonBox}
           value={toDo.details}
           multiline={true}
           onChangeText={text => setToDo({...toDo, details: text})}
@@ -72,16 +96,17 @@ const ScreenToDoDetails = ({route}) => {
       <View style={styles.addButtonBox}>
         <SaveButton isActive={isThereAnyChanges} onPress={updateOrAddToDo} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const colors = getColors('ScreenToDoDetails');
 
 const styles = StyleSheet.create({
-  safeAreaView: {
+  ScreenView: {
     backgroundColor: colors.backgroundColor,
-    flex: 1
+    flex: 1,
+    paddingBottom: '5%'
   },
   titleInput: {
     backgroundColor: colors.titleFieldBackgroundColor,
@@ -91,13 +116,18 @@ const styles = StyleSheet.create({
     paddingLeft: '5%',
     paddingRight: '5%'
   },
-  detailBox: {height: '80%'},
+  detailBox: {height: '78%'},
   detailsInput: {
     color: colors.texts,
     fontSize: 25,
     paddingLeft: '5%',
     paddingRight: '5%'
   },
-  addButtonBox: {width: '100%', alignItems: 'flex-end', paddingRight: '5%'}
+  addButtonBox: {
+    width: '100%',
+    height: '12%',
+    alignItems: 'flex-end',
+    paddingRight: '5%'
+  }
 });
 export default ScreenToDoDetails;

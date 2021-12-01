@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   ScrollView,
   View,
-  Text,
   StyleSheet,
   SearchBar,
   ToDo,
@@ -58,8 +57,7 @@ const ScreenToDos = () => {
     setToDos(oldToDos => {
       const updatedToDos = [...oldToDos];
       if (index != -1) {
-        updatedToDos[index] = toDo;
-        return updatedToDos;
+        updatedToDos.splice(index, 1);
       }
       updatedToDos.unshift(toDo);
       return updatedToDos;
@@ -135,12 +133,15 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: '5%',
+    paddingBottom: '5%'
   },
   scrollView: {width: '100%', marginBottom: '1.5%'},
   contentContainer: {alignItems: 'center'},
   addButton: {
     width: '100%',
+    height: '12%',
     alignItems: 'flex-end',
     paddingRight: '5%'
   }

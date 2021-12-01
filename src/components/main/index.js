@@ -8,6 +8,7 @@ import TouchableOpacity from './TouchableOpacity';
 import Dimensions from './Dimensions';
 import Alert from './Alert';
 import LogBox from './LogBox';
+import Keyboard from './Keyboard';
 
 export {
   SafeAreaView,
@@ -19,5 +20,6 @@ export {
   Dimensions,
   StyleSheet,
   Alert,
-  LogBox
+  LogBox,
+  Keyboard
 };

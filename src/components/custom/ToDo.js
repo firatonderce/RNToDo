@@ -5,11 +5,12 @@ import {statuses} from '../../model/todo';
 import getColors from '../../core/colors';
 
 const {DONE, TODO} = statuses;
-const heightOfToDoItem = Dimensions.get('window').height / 10;
+const heightOfToDoItem = Dimensions.get('window').height / 9;
+const fontSizeOfTitle = 12 + Dimensions.get('window').height / 100;
+const fontSizeOfDate = fontSizeOfTitle - 5;
 
 const ToDo = ({toDo, onPressItem, changeToDoStatus}) => {
   const {id, title, date, status} = toDo;
-
   return (
     <View key={id} style={styles.toDo}>
       <TouchableOpacity onPress={onPressItem} style={styles.firstRow}>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: '3.5%',
     marginLeft: '5%',
-    fontSize: 20
+    fontSize: fontSizeOfTitle
   },
   dateBox: {
     color: colors.dateTextColor,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     padding: '3.5%',
     paddingTop: 0,
     marginLeft: '5%',
-    fontSize: 15
+    fontSize: fontSizeOfDate
   },
   secondRow: {
     flex: 1.5,

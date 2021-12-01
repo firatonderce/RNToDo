@@ -16,7 +16,7 @@ const colors = getColors('NoToDosComponent');
 const styles = StyleSheet.create({
   outerViewStyle: {
     flexDirection: 'row',
-    marginTop: '60%',
+    marginTop: '40%',
     alignItems: 'center'
   },
   textStyle: {fontSize: 24, color: colors.textColor}
