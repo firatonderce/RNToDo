@@ -339,7 +339,7 @@ PODS:
     - React-jsi (= 0.66.3)
     - React-logger (= 0.66.3)
     - React-perflogger (= 0.66.3)
-  - RNBootSplash (3.2.6):
+  - RNBootSplash (4.0.2):
     - React-Core
   - RNCAsyncStorage (1.15.13):
     - React-Core
@@ -555,7 +555,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 50cfe7049167cfc7e83ac5542c6fff0c76791a9b
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
-  RNBootSplash: 51eef7e143faeab63f81ddbb7c1de38b8fba66ed
+  RNBootSplash: 5e82ba24a59a07315cbb2bb4855bb8d76fc7e802
   RNCAsyncStorage: ac55c090d35b880ac47a7807ab797854afc640ae
   RNExitApp: c4e052df2568b43bec8a37c7cd61194d4cfee2c3
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
