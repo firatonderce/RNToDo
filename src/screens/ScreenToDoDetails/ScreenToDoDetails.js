@@ -9,7 +9,7 @@ import {
 } from '../../components';
 
 import getColors from '../../core/colors';
-import {getDate} from '../../utils/Date';
+import {getDate} from '../../utils/date';
 import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
 import WarnHandler from '../../services/WarnHandler';

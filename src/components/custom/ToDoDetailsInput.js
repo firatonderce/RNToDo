@@ -47,6 +47,7 @@ const ToDoDetailsInput = ({
         multiline={multiline}
         placeholderTextColor={placeholderTextColor}
         onSubmitEditing={() => Keyboard.dismiss()}
+        textAlignVertical="top"
         style={{
           ...style,
           marginBottom: marginBottom,

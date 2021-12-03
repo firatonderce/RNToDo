@@ -8,7 +8,8 @@ const TextInputComponent = ({
   onChangeText,
   placeholderTextColor,
   multiline,
-  onSubmitEditing
+  onSubmitEditing,
+  textAlignVertical
 }) => {
   return (
     <TextInput
@@ -19,6 +20,7 @@ const TextInputComponent = ({
       multiline={multiline}
       placeholderTextColor={placeholderTextColor}
       style={style}
+      textAlignVertical={textAlignVertical}
     />
   );
 };
