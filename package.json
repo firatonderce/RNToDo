@@ -1,10 +1,14 @@
 {
   "name": "rntodoapp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "version:patch": "npm version patch && npx react-native-version --never-amend",
+    "version:minor": "npm version minor && npx react-native-version --never-amend",
+    "version:major": "npm version major && npx react-native-version --never-amend",
     "update-packages": "npm install && cd ios && pod install && cd ..",
     "svg": "node src/bin/gen-svg.js && eslint src/core/icons.js --fix",
+    "generate-apk": "cd android && ./gradlew assembleRelease",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
