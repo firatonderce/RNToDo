@@ -53,7 +53,7 @@ const ScreenToDos = () => {
 
   const addOrEditToDo = toDo => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
-    setToDos(oldToDos => {
+    return setToDos(oldToDos => {
       const updatedToDos = [...oldToDos];
       if (index != -1) {
         updatedToDos.splice(index, 1);
@@ -61,18 +61,16 @@ const ScreenToDos = () => {
       updatedToDos.unshift(toDo);
       return updatedToDos;
     });
-    return navigation.goBack();
   };
 
   const deleteToDo = toDo => {
     const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
     if (index == -1) return;
-    setToDos(oldToDos => {
+    return setToDos(oldToDos => {
       const updatedToDos = [...oldToDos];
       updatedToDos.splice(index, 1);
       return updatedToDos;
     });
-    return navigation.goBack();
   };
 
   const searchToDo = text => {
