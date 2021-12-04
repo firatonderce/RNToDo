@@ -22,8 +22,10 @@ const componentColors = {
   NoToDosFoundComponent: {
     textColor: colorPalette.darkgrey
   },
-  NavigationHeader: {
-    backgroundColor: colorPalette.darkgrey
+  Navigation: {
+    headerBackgroundColor: colorPalette.darkgrey,
+    navigateToDarkGrey: colorPalette.grey,
+    navigateToHoney: colorPalette.honey
   }
 };
 
@@ -46,4 +48,8 @@ export default getColors = name => {
     : componentColors[name]
     ? componentColors[name]
     : {};
+};
+
+export const getScreenThemesColors = () => {
+  return screenColors;
 };

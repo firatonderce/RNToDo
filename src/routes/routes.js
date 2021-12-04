@@ -17,7 +17,7 @@ const routes = [
         icon={'left'}
         route={{
           routeName: 'ScreenToDoDetails',
-          params: {triggerBack: true}
+          params: {triggerBack: true, triggerDelete: false}
         }}
       />
     ),
@@ -26,7 +26,7 @@ const routes = [
         icon={'remove'}
         route={{
           routeName: 'ScreenToDoDetails',
-          params: {triggerDelete: true}
+          params: {triggerDelete: true, triggerBack: false}
         }}
       />
     )
