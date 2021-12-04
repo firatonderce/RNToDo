@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, TextInput, Keyboard} from '../main';
+import {ScrollView, TextInput, Keyboard} from '../main';
 
 const ToDoDetailsInput = ({
   style,
@@ -35,7 +35,7 @@ const ToDoDetailsInput = ({
   }, []);
 
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         marginBottom
@@ -46,7 +46,6 @@ const ToDoDetailsInput = ({
         onChangeText={onChangeText}
         multiline={multiline}
         placeholderTextColor={placeholderTextColor}
-        onSubmitEditing={() => Keyboard.dismiss()}
         textAlignVertical="top"
         style={{
           ...style,
@@ -55,7 +54,7 @@ const ToDoDetailsInput = ({
           height: '100%'
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

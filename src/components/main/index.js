@@ -9,6 +9,7 @@ import Dimensions from './Dimensions';
 import Alert from './Alert';
 import LogBox from './LogBox';
 import Keyboard from './Keyboard';
+import Animated from './Animated';
 
 export {
   SafeAreaView,
@@ -21,5 +22,6 @@ export {
   StyleSheet,
   Alert,
   LogBox,
-  Keyboard
+  Keyboard,
+  Animated
 };
