@@ -3,7 +3,10 @@ import {ScrollView} from 'react-native';
 
 const ScrollViewComponent = ({children, contentContainerStyle, style}) => {
   return (
-    <ScrollView style={style} contentContainerStyle={contentContainerStyle}>
+    <ScrollView
+      keyboardDismissMode="interactive"
+      style={style}
+      contentContainerStyle={contentContainerStyle}>
       {children}
     </ScrollView>
   );

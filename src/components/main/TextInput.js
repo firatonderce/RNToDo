@@ -9,12 +9,14 @@ const TextInputComponent = ({
   placeholderTextColor,
   multiline,
   onSubmitEditing,
-  textAlignVertical
+  textAlignVertical,
+  keyboardDismissMode
 }) => {
   return (
     <TextInput
       onSubmitEditing={onSubmitEditing}
       placeholder={placeholder}
+      keyboardDismissMode={keyboardDismissMode}
       value={value}
       onChangeText={onChangeText}
       multiline={multiline}

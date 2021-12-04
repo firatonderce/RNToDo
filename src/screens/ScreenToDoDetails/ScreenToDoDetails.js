@@ -23,11 +23,25 @@ const ScreenToDoDetails = ({route}) => {
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
   const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
+  const [actionDone, setActionDone] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (route.params.triggerBack) return triggerGoBack();
-    if (route.params.type == navigationTypes.CREATE) return;
+    if (actionDone) return navigation.goBack();
+  }, [actionDone]);
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', event => {
+        if (!isThereAnyChanges || actionDone) return;
+        event.preventDefault();
+        return warnGoBack(event);
+      }),
+    [isThereAnyChanges, actionDone]
+  );
+
+  useEffect(() => {
+    if (route.params.triggerBack) return navigation.goBack();
     if (route.params.triggerDelete) return triggerDelete();
   }, [route.params]);
 
@@ -36,16 +50,8 @@ const ScreenToDoDetails = ({route}) => {
     return setIsThereAnyChanges(isThereAnyChanges);
   }, [toDo]);
 
-  const triggerGoBack = () => {
-    return isThereAnyChanges ? warnGoBack() : navigation.goBack();
-  };
-
   const warnGoBack = () => {
-    let acceptAction =
-      params.type == navigationTypes.CREATE
-        ? navigation.goBack
-        : () => deleteToDo(toDo);
-
+    const acceptAction = () => setActionDone(true);
     return WarnHandler({
       ...warns.goBack,
       acceptAction
@@ -53,23 +59,26 @@ const ScreenToDoDetails = ({route}) => {
   };
 
   const updateOrAddToDo = () => {
-    if (isThereAnyChanges) {
-      const date = getDate();
-      const newTodo = {...toDo, date};
-      setOldVersion(newTodo);
-      return addOrEditToDo(newTodo);
-    }
+    const date = getDate();
+    const newTodo = {...toDo, date};
+    setOldVersion(newTodo);
+    addOrEditToDo(newTodo);
+    setActionDone(true);
   };
 
   const checkIfAnyUpdatesAvailable = () => {
     const keys = Object.keys(oldVersion);
-    return keys.some(key => oldVersion[key] != toDo[key]);
+    return keys.some(key => oldVersion[key] != toDo[key] && key != 'date');
   };
 
   const triggerDelete = () => {
+    if (params.type == navigationTypes.CREATE) return;
     return WarnHandler({
       ...warns.deleteToDo,
-      acceptAction: () => deleteToDo(toDo)
+      acceptAction: () => {
+        deleteToDo(toDo);
+        setActionDone(true);
+      }
     });
   };
 
