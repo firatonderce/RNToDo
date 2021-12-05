@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {
   SafeAreaView,
+  Animated,
   ScrollView,
   View,
   StyleSheet,

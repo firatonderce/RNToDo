@@ -8,12 +8,12 @@ const ButtonHeader = props => {
   const navigation = useNavigation();
   const icons = {
     left: {
-      style: {width: 20, height: 20, margin: 20},
+      style: {width: 20, height: 20, margin: 20, marginBottom: 30},
       source: () => <SvgIconLeftArrowLight />
     },
 
     remove: {
-      style: {margin: 20},
+      style: {margin: 20, marginBottom: 50},
       source: () => <SvgIconTrashLight />
     }
   };

@@ -10,6 +10,8 @@ import Alert from './Alert';
 import LogBox from './LogBox';
 import Keyboard from './Keyboard';
 import Animated from './Animated';
+import PanGestureHandler from './PanGestureHandler';
+import TouchableWithoutFeedback from './TouchableWithoutFeedback';
 
 export {
   SafeAreaView,
@@ -23,5 +25,7 @@ export {
   Alert,
   LogBox,
   Keyboard,
-  Animated
+  Animated,
+  TouchableWithoutFeedback,
+  PanGestureHandler
 };
