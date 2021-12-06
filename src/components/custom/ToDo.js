@@ -48,7 +48,7 @@ const AnimatedContainer = props => {
   };
 
   const handleOnPress = () => {
-    let duration = 100;
+    const duration = 100;
 
     if (lastPosition == 0) {
       return Animated.sequence([
@@ -71,7 +71,7 @@ const AnimatedContainer = props => {
     const {toDo, changeToDoStatus} = props;
     const {id, title, date, status} = toDo;
     return (
-      <View key={id} onStartShouldSetResponder={() => true} style={styles.toDo}>
+      <View key={id} style={styles.toDo}>
         <TouchableWithoutFeedback
           containerStyle={{flex: 7}}
           style={styles.firstRow}
@@ -96,7 +96,6 @@ const AnimatedContainer = props => {
       onEnded={finalize}
       onGestureEvent={swipe}>
       <Animated.View
-        onStartShouldSetResponder={() => true}
         style={{
           transform: [
             {

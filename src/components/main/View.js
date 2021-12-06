@@ -1,17 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
 
-const ViewComponent = ({
-  children,
-  onStartShouldSetResponder,
-  onPress,
-  style
-}) => {
+const ViewComponent = ({children, onPress, style}) => {
   return (
-    <View
-      onStartShouldSetResponder={onStartShouldSetResponder}
-      onPress={onPress}
-      style={style}>
+    <View onPress={onPress} style={style}>
       {children}
     </View>
   );
