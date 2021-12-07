@@ -1,6 +1,6 @@
 {
   "name": "rntodoapp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "version:patch": "npm version patch && npx react-native-version --never-amend",
