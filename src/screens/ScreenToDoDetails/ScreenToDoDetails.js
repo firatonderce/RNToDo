@@ -13,7 +13,7 @@ import {getDate} from '../../utils/date';
 import {useNavigation} from '@react-navigation/core';
 import navigationTypes from '../../types/navigationTypes';
 import WarnHandler from '../../services/WarnHandler';
-import warns from './data/warns';
+import warns from '../../data/warns';
 
 const heightOfApplyButtonBox = Dimensions.get('window').height * 0.12;
 
@@ -52,7 +52,7 @@ const ScreenToDoDetails = ({route}) => {
 
   const warnGoBack = () => {
     const acceptAction = () => setActionDone(true);
-    return WarnHandler({
+    WarnHandler({
       ...warns.goBack,
       acceptAction
     });
@@ -73,13 +73,7 @@ const ScreenToDoDetails = ({route}) => {
 
   const triggerDelete = () => {
     if (params.type == navigationTypes.CREATE) return;
-    return WarnHandler({
-      ...warns.deleteToDo,
-      acceptAction: () => {
-        deleteToDo(toDo);
-        setActionDone(true);
-      }
-    });
+    deleteToDo({toDo, callback: () => setActionDone(true)});
   };
 
   return (

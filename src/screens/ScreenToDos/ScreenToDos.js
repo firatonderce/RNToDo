@@ -14,6 +14,8 @@ import {toDoModel} from '../../model/todo';
 import AsyncStorageManager from '../../services/AsyncStorageManager';
 import {NoToDos, NoToDosFound} from './components';
 import navigationTypes from '../../types/navigationTypes';
+import WarnHandler from '../../services/WarnHandler';
+import warns from '../../data/warns';
 
 const newToDo = () => {
   return {...toDoModel, id: Math.random()};
@@ -63,13 +65,22 @@ const ScreenToDos = () => {
     });
   };
 
-  const deleteToDo = toDo => {
-    const index = toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id);
-    if (index == -1) return;
-    return setToDos(oldToDos => {
-      const updatedToDos = [...oldToDos];
-      updatedToDos.splice(index, 1);
-      return updatedToDos;
+  const deleteToDo = ({toDo, index, callback}) => {
+    const indexToSearch = toDo
+      ? toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id)
+      : index;
+    if (indexToSearch == -1) return;
+
+    WarnHandler({
+      ...warns.deleteToDo,
+      acceptAction: () => {
+        setToDos(oldToDos => {
+          const updatedToDos = [...oldToDos];
+          updatedToDos.splice(indexToSearch, 1);
+          return updatedToDos;
+        });
+        callback && callback();
+      }
     });
   };
 
@@ -102,6 +113,7 @@ const ScreenToDos = () => {
       <ToDo
         key={index}
         toDo={toDo}
+        deleteToDo={() => deleteToDo({index})}
         onPressItem={() => navigateToDetailScreen(navigationTypes.EDIT, index)}
         changeToDoStatus={newStatus => changeToDoStatus(index, newStatus)}
       />
