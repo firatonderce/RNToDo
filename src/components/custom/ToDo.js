@@ -8,7 +8,7 @@ import {
   StyleSheet,
   PanGestureHandler
 } from '../main';
-import {SvgIconDoneLight} from '../../core/icons';
+import {SvgIconDoneLight, SvgIconTrashLight} from '../../core/icons';
 import {statuses} from '../../model/todo';
 import getColors from '../../core/colors';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -71,7 +71,7 @@ const AnimatedContainer = props => {
     const {toDo, changeToDoStatus} = props;
     const {id, title, date, status} = toDo;
     return (
-      <View key={id} style={styles.toDo}>
+      <View key={id} style={styles.toDoContentContainer}>
         <TouchableWithoutFeedback
           containerStyle={{flex: 7}}
           style={styles.firstRow}
@@ -90,37 +90,72 @@ const AnimatedContainer = props => {
     );
   };
 
+  const animateStyle = StyleSheet.create({
+    container: {width: '90%', alignItems: 'center'},
+    toDo: {
+      backgroundColor: colors.backgroundColor,
+      borderRadius: 20,
+      height: heightOfToDoItem,
+      width: '100%',
+      marginTop: '2.75%',
+      flexDirection: 'row',
+      zIndex: 1
+    },
+    trashIconContainer: {
+      position: 'absolute',
+      alignItems: 'center',
+      right: 0,
+      height: '100%',
+      justifyContent: 'center',
+      opacity: buttonOpacity.interpolate({
+        inputRange: [0.5, 0.9, 1],
+        outputRange: [0, 0, 1]
+      })
+    },
+    trashIconButton: {
+      width: 65,
+      height: 65,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 50,
+      backgroundColor: colors.backgroundColor
+    }
+  });
+
   return (
-    <PanGestureHandler
-      activeOffsetX={[-1, 1]}
-      onEnded={finalize}
-      onGestureEvent={swipe}>
-      <Animated.View
-        style={{
-          transform: [
-            {
-              translateX: toDoCardPosition
-            }
-          ],
-          opacity: buttonOpacity
-        }}>
-        <ToDo />
+    <View style={animateStyle.container}>
+      <PanGestureHandler
+        activeOffsetX={[-1, 1]}
+        onEnded={finalize}
+        onGestureEvent={swipe}>
+        <Animated.View
+          style={{
+            ...animateStyle.toDo,
+            transform: [
+              {
+                translateX: toDoCardPosition
+              }
+            ],
+            opacity: buttonOpacity
+          }}>
+          <ToDo />
+        </Animated.View>
+      </PanGestureHandler>
+      <Animated.View style={animateStyle.trashIconContainer}>
+        <TouchableOpacity
+          style={animateStyle.trashIconButton}
+          onPress={props.deleteToDo}>
+          <SvgIconTrashLight />
+        </TouchableOpacity>
       </Animated.View>
-    </PanGestureHandler>
+    </View>
   );
 };
 
 const colors = getColors('ToDoComponent');
 
 const styles = StyleSheet.create({
-  toDo: {
-    backgroundColor: colors.backgroundColor,
-    borderRadius: 20,
-    height: heightOfToDoItem,
-    width: '90%',
-    marginTop: '2.75%',
-    flexDirection: 'row'
-  },
+  toDoContentContainer: {flex: 1, flexDirection: 'row'},
   firstRow: {
     flex: 1,
     justifyContent: 'center'
