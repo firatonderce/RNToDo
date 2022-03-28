@@ -65,7 +65,7 @@ const ScreenToDos = () => {
     });
   };
 
-  const deleteToDo = ({toDo, index, callback}) => {
+  const deleteToDo = ({toDo, index = -1, callback}) => {
     const indexToSearch = toDo
       ? toDos.findIndex(oldtoDo => oldtoDo.id == toDo.id)
       : index;

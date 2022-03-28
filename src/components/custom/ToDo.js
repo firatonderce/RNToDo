@@ -35,7 +35,7 @@ const AnimatedContainer = props => {
   };
 
   const finalize = ({nativeEvent: {translationX}}) => {
-    let toValueForAnimation = translationX > 0 ? 0 : -openValue;
+    let toValueForAnimation = translationX >= 0 ? 0 : -openValue;
     animateSwipe(toValueForAnimation);
   };
 
@@ -49,7 +49,6 @@ const AnimatedContainer = props => {
 
   const handleOnPress = () => {
     const duration = 100;
-
     if (lastPosition == 0) {
       return Animated.sequence([
         Animated.timing(buttonOpacity, {
@@ -91,21 +90,26 @@ const AnimatedContainer = props => {
   };
 
   const animateStyle = StyleSheet.create({
-    container: {width: '90%', alignItems: 'center'},
+    container: {
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: '2.75%'
+    },
     toDo: {
       backgroundColor: colors.backgroundColor,
       borderRadius: 20,
       height: heightOfToDoItem,
       width: '100%',
-      marginTop: '2.75%',
       flexDirection: 'row',
       zIndex: 1
     },
     trashIconContainer: {
       position: 'absolute',
       alignItems: 'center',
+      alignContent: 'center',
       right: 0,
-      height: '100%',
+      height: heightOfToDoItem,
       justifyContent: 'center',
       opacity: buttonOpacity.interpolate({
         inputRange: [0.5, 0.9, 1],
@@ -113,8 +117,8 @@ const AnimatedContainer = props => {
       })
     },
     trashIconButton: {
-      width: 65,
-      height: 65,
+      width: heightOfToDoItem / 1.5,
+      height: heightOfToDoItem / 1.5,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 50,

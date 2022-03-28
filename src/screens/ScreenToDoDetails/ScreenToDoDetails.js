@@ -19,12 +19,19 @@ const heightOfApplyButtonBox = Dimensions.get('window').height * 0.12;
 
 const ScreenToDoDetails = ({route}) => {
   const {params} = route;
-  const {addOrEditToDo, deleteToDo} = params;
+  const {addOrEditToDo, deleteToDo, type} = params;
   const [oldVersion, setOldVersion] = useState(params.toDo);
   const [toDo, setToDo] = useState(oldVersion);
   const [isThereAnyChanges, setIsThereAnyChanges] = useState(false);
   const [actionDone, setActionDone] = useState(false);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (type != navigationTypes.CREATE) return;
+    navigation.setOptions({
+      headerRight: null
+    });
+  }, []);
 
   useEffect(() => {
     if (actionDone) return navigation.goBack();
@@ -72,8 +79,7 @@ const ScreenToDoDetails = ({route}) => {
   };
 
   const triggerDelete = () => {
-    if (params.type == navigationTypes.CREATE) return;
-    deleteToDo({toDo, callback: () => setActionDone(true)});
+    return deleteToDo({toDo, callback: () => setActionDone(true)});
   };
 
   return (
