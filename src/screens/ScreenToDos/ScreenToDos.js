@@ -111,7 +111,7 @@ const ScreenToDos = () => {
     if (!toDosToDisplay.length) return <NoToDosFound />;
     return toDosToDisplay.map((toDo, index) => (
       <ToDo
-        key={Math.random()}
+        key={toDo.id}
         toDo={toDo}
         deleteToDo={() => deleteToDo({index})}
         onPressItem={() => navigateToDetailScreen(navigationTypes.EDIT, index)}
